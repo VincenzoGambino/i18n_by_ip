@@ -1,0 +1,4 @@
+name = i18n by IP
+description = Uses user ip to detect language
+core = 7.x
+package = Other

@@ -1,0 +1,34 @@
+<?php
+
+
+function i18n_by_ip_menu() {
+  // @todo Remove this check if block module is re-added as a dependency.
+  
+    $items['admin/config/regional/i18n_by_ip'] = array(
+      'title' => 'i18n by IP',
+      'description' => 'Configure i18n by IP.',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('i18n_by_ip_admin_settings_form'),
+      'access arguments' => array('administer i18n by ip'),
+      'type' => MENU_NORMAL_ITEM,
+      'file' => 'i18n_by_ip.admin.inc',
+    );
+    return $items;
+  }
+
+  /**
+  * Implements hook_language_negotiation_info().
+  */
+  function i18n_language_negotiation_info() {
+    return array(
+      'ip' => array(
+        'callbacks' => array(
+          'language' => 'i18n_by_ip_detect_language',
+        ),
+        'weight' => -10,
+        'name' => t('IP'),
+        'file' => drupal_get_path('module', 'i18n_by_ip') . '/i18n_by_ip_detection.inc',
+        'description' => t('Determine the language from ip.'),
+      ),
+    );
+  }
